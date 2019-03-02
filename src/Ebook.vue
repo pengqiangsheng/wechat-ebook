@@ -29,6 +29,9 @@
       <div class="mask-tip" v-if="waiting == 3" @click="toggleMaskAndRead">
         <div class="left tip-wrapper">
           <div class="wrapper">
+            <div class="tip-text-up">
+              <span>点击左边</span>
+            </div>
             <div class="tip arrow-left"></div>
             <div class="tip-text">
               <span>上一页</span>
@@ -37,6 +40,9 @@
         </div>
         <div class="center tip-wrapper">
           <div class="wrapper">
+            <div class="tip-text-up">
+              <span>点击中间</span>
+            </div>
             <div class="tip tap"></div>
             <div class="tip-text">
               <span>弹出菜单</span>
@@ -45,6 +51,9 @@
         </div>
         <div class="right tip-wrapper">
           <div class="wrapper">
+            <div class="tip-text-up">
+              <span>点击右边</span>
+            </div>
             <div class="tip arrow-right"></div>
             <div class="tip-text">
               <span>下一页</span>
@@ -255,7 +264,7 @@ export default {
         })
         .then(result => {
           this.navigation = this.book.navigation;
-          console.log(this.navigation);
+          // console.log(this.navigation);
           this.locations = this.book.locations;
           this.bookAvailable = true;
           this.waiting = 3;
@@ -265,7 +274,7 @@ export default {
   computed: {},
   mounted() {
     this.showEpub();
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
   }
 };
 </script>
@@ -579,7 +588,7 @@ export default {
       .tip-wrapper {
         .wrapper {
           position: relative;
-          top: 45%;
+          top: 42%;
           text-align: center;
           .tip {
             width: 50px;
@@ -587,6 +596,9 @@ export default {
             margin: 0 auto;
             background-size: 50px 50px;
             background-repeat: no-repeat;
+          }
+          .tip-text-up {
+            margin-bottom: px2rem(10);
           }
           .tip-text {
             margin-top: px2rem(10);
@@ -597,7 +609,7 @@ export default {
         flex: 0 0 px2rem(100);
         .wrapper {
           .arrow-left {
-            background-image: url("./static/ebook-icon/arrow-left.png");
+            background-image: url("./assets/arrow-left.png");
           }
         }
       }
@@ -605,7 +617,7 @@ export default {
         flex: 1;
         .wrapper {
           .tap {
-            background-image: url("./static/ebook-icon/tap.png");
+            background-image: url("./assets/tap.png");
           }
         }
       }
@@ -613,7 +625,7 @@ export default {
         flex: 0 0 px2rem(100);
         .wrapper {
           .arrow-right {
-            background-image: url("./static/ebook-icon/arrow-right.png");
+            background-image: url("./assets/arrow-right.png");
           }
         }
       }

@@ -137,8 +137,7 @@ export default {
         window.pageYOffset ||
         document.documentElement.scrollTop ||
         document.body.scrollTop;
-
-      console.log(top1);
+      // console.log(top1);
       if (top > 10) {
         this.isShow = true;
       } else {
