@@ -1,10 +1,12 @@
 <template>
   <div class="book">
-    <div class="header" :class="{show: isShow}">
+    <div class="header"
+         :class="{show: isShow}">
       <div class="headline">书架</div>
     </div>
     <div class="content">
-      <div class="content-wrapper" ref="content">
+      <div class="content-wrapper"
+           ref="content">
         <div class="search-wrapper">
           <div class="search">
             <div class="icon">
@@ -16,7 +18,9 @@
           </div>
         </div>
         <div class="item-wrapper">
-          <div class="item" v-for="(item, index) in bookInfo" :key="index">
+          <div class="item"
+               v-for="(item, index) in bookInfo"
+               :key="index">
             <router-link :to="item.bookUrl">
               <div class="item-img">
                 <img :src="item.bookImageUrl">
@@ -29,14 +33,14 @@
     </div>
     <div class="footer">
       <div class="nav">
-        <div
-          class="nav-item"
-          :class="[index === selectIndex ? 'active' : '']"
-          v-for="(item, index) in navList"
-          :key="index"
-          @click="changeIndex(index)"
-        >
-          <img class="item-img" :src="item.url" :ref="index">
+        <div class="nav-item"
+             :class="[index === selectIndex ? 'active' : '']"
+             v-for="(item, index) in navList"
+             :key="index"
+             @click="changeIndex(index)">
+          <img class="item-img"
+               :src="item.url"
+               :ref="index">
           <span>{{item.name}}</span>
         </div>
       </div>
@@ -47,7 +51,7 @@
 <script>
 export default {
   name: "Book",
-  data() {
+  data () {
     return {
       selectIndex: 1,
       isShow: false,
@@ -117,12 +121,12 @@ export default {
     };
   },
   methods: {
-    init() {
+    init () {
       this.navList[this.selectIndex].url = this.navList[
         this.selectIndex
       ].select;
     },
-    changeIndex(index) {
+    changeIndex (index) {
       this.selectIndex = index;
       this.navList[index].url = this.navList[index].select;
       for (var i = 0, len = this.navList.length; i < len; i++) {
@@ -131,7 +135,7 @@ export default {
         }
       }
     },
-    handleScroll() {
+    handleScroll () {
       const top = document.documentElement.scrollTop;
       const top1 =
         window.pageYOffset ||
@@ -145,11 +149,11 @@ export default {
       }
     }
   },
-  mounted() {
+  mounted () {
     this.init();
     window.addEventListener("scroll", this.handleScroll);
   },
-  unmounted() {
+  unmounted () {
     window.removeEventListener("scroll", this.handleScroll);
   }
 };
@@ -192,7 +196,7 @@ export default {
       .search-wrapper {
         position: relative;
         width: calc(100% - 20px);
-        height: px2rem(30);
+        height: 40px;
         padding: 0 10px;
         .search {
           position: relative;
@@ -202,25 +206,27 @@ export default {
           background-color: #f2f2f2;
           .icon {
             position: absolute;
-            width: px2rem(30);
-            height: px2rem(30);
-            padding: px2rem(6);
+            height: 100%;
+            width: 40px;
             img {
               width: 60%;
               height: 60%;
+              margin: 20%;
             }
           }
           .input-wrapper {
             position: relative;
-            width: calc(100% - px2rem(30));
+            width: calc(100% - 40px);
             height: 100%;
-            padding-left: px2rem(30);
+            padding-left: 40px;
             input {
-              position: absolute;
               border: none;
               outline: none;
               background-color: rgba(0, 0, 0, 0);
               height: 100%;
+              width: 100%;
+              padding: 0;
+              float: left;
             }
           }
         }
@@ -233,7 +239,7 @@ export default {
         }
         position: relative;
         width: 100%;
-        margin-bottom: 41px;
+        padding-bottom: 41px;
         .item {
           position: relative;
           float: left;

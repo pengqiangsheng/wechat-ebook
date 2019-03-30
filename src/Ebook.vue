@@ -1,6 +1,7 @@
 <template>
   <div class="ebook">
-    <div class="loading" v-if="waiting === 2">
+    <div class="loading"
+         v-if="waiting === 2">
       <div class="flex-container">
         <div class="unit">
           <div class="heart">
@@ -22,11 +23,16 @@
     <div class="read-wrapper">
       <div id="read"></div>
       <div class="mask">
-        <div class="left" @click="prevPage"></div>
-        <div class="center" @click="toggleTitleAndMenu"></div>
-        <div class="right" @click="nextPage"></div>
+        <div class="left"
+             @click="prevPage"></div>
+        <div class="center"
+             @click="toggleTitleAndMenu"></div>
+        <div class="right"
+             @click="nextPage"></div>
       </div>
-      <div class="mask-tip" v-if="waiting == 3" @click="toggleMaskAndRead">
+      <div class="mask-tip"
+           v-if="waiting == 3"
+           @click="toggleMaskAndRead">
         <div class="left tip-wrapper">
           <div class="wrapper">
             <div class="tip-text-up">
@@ -62,21 +68,19 @@
         </div>
       </div>
     </div>
-    <menu-bar
-      :ifTitleAndMenuShow="ifTitleAndMenuShow"
-      :fontSizeList="fontSizeList"
-      :defaultFontSize="defaultFontSize"
-      @setFontSize="setFontSize"
-      :themeList="themeList"
-      :defaultTheme="defaultTheme"
-      @setTheme="setTheme"
-      :bookAvailable="bookAvailable"
-      @onProgressChange="onProgressChange"
-      :navigation="navigation"
-      @jumpTo="jumpTo"
-      :parentProgress="progress"
-      ref="menuBar"
-    ></menu-bar>
+    <menu-bar :ifTitleAndMenuShow="ifTitleAndMenuShow"
+              :fontSizeList="fontSizeList"
+              :defaultFontSize="defaultFontSize"
+              @setFontSize="setFontSize"
+              :themeList="themeList"
+              :defaultTheme="defaultTheme"
+              @setTheme="setTheme"
+              :bookAvailable="bookAvailable"
+              @onProgressChange="onProgressChange"
+              :navigation="navigation"
+              @jumpTo="jumpTo"
+              :parentProgress="progress"
+              ref="menuBar"></menu-bar>
   </div>
 </template>
 
@@ -90,7 +94,7 @@ export default {
     TitleBar,
     MenuBar
   },
-  data() {
+  data () {
     return {
       waiting: 2,
       ifTitleAndMenuShow: false,
@@ -159,10 +163,10 @@ export default {
     };
   },
   methods: {
-    toggleMaskAndRead() {
+    toggleMaskAndRead () {
       this.waiting = 1;
     },
-    showProgress() {
+    showProgress () {
       // 获取当前的位置信息
       const currentLocation = this.rendition.currentLocation();
       // 获取当前位置的进度百分比
@@ -173,40 +177,40 @@ export default {
       this.progress = Math.round(this.progress * 100);
     },
     // 根据链接跳转目录
-    jumpTo(href) {
+    jumpTo (href) {
       this.rendition.display(href).then(() => {
         this.showProgress();
       });
       this.hideTitleAndMenu();
     },
-    hideTitleAndMenu() {
+    hideTitleAndMenu () {
       this.ifTitleAndMenuShow = false;
       this.$refs.menuBar.hideSetting();
       this.$refs.menuBar.hideContent();
     },
     // progress 进度条的数值 (0-100)
-    onProgressChange(progress) {
+    onProgressChange (progress) {
       const percentage = progress / 100;
       const location =
         percentage > 0 ? this.locations.cfiFromPercentage(percentage) : 0;
       this.rendition.display(location);
     },
-    setTheme(index) {
+    setTheme (index) {
       this.themes.select(this.themeList[index].name);
       this.defaultTheme = index;
     },
-    registerTheme() {
+    registerTheme () {
       this.themeList.forEach(theme => {
         this.themes.register(theme.name, theme.style);
       });
     },
-    setFontSize(fontSize) {
+    setFontSize (fontSize) {
       this.defaultFontSize = fontSize;
       if (this.themes) {
         this.themes.fontSize(fontSize + "px");
       }
     },
-    toggleTitleAndMenu() {
+    toggleTitleAndMenu () {
       if (!this.bookAvailable) {
         return;
       }
@@ -216,14 +220,14 @@ export default {
         this.$refs.menuBar.hideSetting();
       }
     },
-    prevPage() {
+    prevPage () {
       if (this.rendition && this.bookAvailable) {
         this.rendition.prev().then(() => {
           this.showProgress();
         });
       }
     },
-    nextPage() {
+    nextPage () {
       if (this.rendition && this.bookAvailable) {
         // this.rendition.next()
         this.rendition.next().then(() => {
@@ -232,11 +236,11 @@ export default {
       }
     },
     // 选择书籍
-    selectBook(choose) {
+    selectBook (choose) {
       return new Epub(choose);
     },
     // 电子书的解析和渲染
-    showEpub() {
+    showEpub () {
       // 生成Book
       // this.book = new Epub(DOWNLOAD_URL)
       this.book = this.selectBook(this.bookInfo[this.$route.params.id].bookUrl);
@@ -272,7 +276,7 @@ export default {
     }
   },
   computed: {},
-  mounted() {
+  mounted () {
     this.showEpub();
     // console.log(this.$route.params.id);
   }
@@ -284,6 +288,7 @@ export default {
   position: relative;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   .loading {
     position: absolute;
     top: 0;
