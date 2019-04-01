@@ -1,5 +1,5 @@
 <template>
-  <div class="book">
+  <div class="wechat-read-shelf">
     <div class="header"
          :class="{show: isShow}">
       <div class="headline">书架</div>
@@ -10,7 +10,7 @@
         <div class="search-wrapper">
           <div class="search">
             <div class="icon">
-              <img src="./assets/search.png">
+              <img src="../../assets/search.png">
             </div>
             <div class="input-wrapper">
               <input placeholder="搜索">
@@ -31,26 +31,12 @@
         </div>
       </div>
     </div>
-    <div class="footer">
-      <div class="nav">
-        <div class="nav-item"
-             :class="[index === selectIndex ? 'active' : '']"
-             v-for="(item, index) in navList"
-             :key="index"
-             @click="changeIndex(index)">
-          <img class="item-img"
-               :src="item.url"
-               :ref="index">
-          <span>{{item.name}}</span>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Book",
+  name: "wechatReadShelf",
   data () {
     return {
       selectIndex: 1,
@@ -121,20 +107,6 @@ export default {
     };
   },
   methods: {
-    init () {
-      this.navList[this.selectIndex].url = this.navList[
-        this.selectIndex
-      ].select;
-    },
-    changeIndex (index) {
-      this.selectIndex = index;
-      this.navList[index].url = this.navList[index].select;
-      for (var i = 0, len = this.navList.length; i < len; i++) {
-        if (i != index) {
-          this.navList[i].url = this.navList[i].back;
-        }
-      }
-    },
     handleScroll () {
       const top = document.documentElement.scrollTop;
       const top1 =
@@ -150,7 +122,6 @@ export default {
     }
   },
   mounted () {
-    this.init();
     window.addEventListener("scroll", this.handleScroll);
   },
   unmounted () {
@@ -160,8 +131,8 @@ export default {
 </script>
 
 <style lang='scss'>
-@import "assets/styles/global";
-.book {
+@import "../../assets/styles/global";
+.wechat-read-shelf {
   position: absolute;
   z-index: 100;
   width: 100%;
@@ -256,44 +227,6 @@ export default {
               margin: 10px auto;
             }
           }
-        }
-      }
-    }
-  }
-  .footer {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    z-index: 1;
-    background-color: #fff;
-    height: px2rem(60);
-    border-top: px2rem(1) solid #e6e8ea;
-    box-shadow: 0 -1px 1px 0 #efefef;
-    .nav {
-      width: 100%;
-      height: calc(100% - 20px);
-      padding: px2rem(10) 0;
-      .nav-item {
-        position: relative;
-        float: left;
-        width: 25%;
-        height: 100%;
-        font-size: px2rem(10);
-        text-align: center;
-        color: #717882;
-        img {
-          height: px2rem(30);
-          display: block;
-          margin: 0 auto;
-        }
-        &.nav-item:nth-child(2) {
-          img {
-            height: px2rem(26);
-            margin-top: px2rem(3);
-          }
-        }
-        &.active {
-          color: #1b88ee;
         }
       }
     }

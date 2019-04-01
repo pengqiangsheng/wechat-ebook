@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <keep-alive exclude="Ebook">
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
@@ -17,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 </script>
 
-<style>
+ <style lang="scss">
+@import "assets/styles/global";
 #app {
   position: relative;
   width: 100%;

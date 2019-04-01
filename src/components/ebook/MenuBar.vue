@@ -1,36 +1,44 @@
 <template>
-  <div class="menu-bar">
+  <div class="wechat-read-ebook-menu-bar">
     <transition name="slide-up">
       <div class="menu-wrapper"
-      :class="{'hide-box-shadow':ifSettingShow}"
-      v-show="ifTitleAndMenuShow">
+           :class="{'hide-box-shadow':ifSettingShow}"
+           v-show="ifTitleAndMenuShow">
         <div class="icon-wrapper">
-          <div class="icon-menu icon" @click="showContent"></div>
+          <div class="icon-menu icon"
+               @click="showContent"></div>
         </div>
         <div class="icon-wrapper">
-          <div class="icon-progress icon" @click="showSetting(2)"></div>
+          <div class="icon-progress icon"
+               @click="showSetting(2)"></div>
         </div>
         <div class="icon-wrapper">
-          <div class="icon-bright icon" @click="showSetting(1)"></div>
+          <div class="icon-bright icon"
+               @click="showSetting(1)"></div>
         </div>
         <div class="icon-wrapper">
-          <div class="icon-a icon" @click="showSetting(0)">A</div>
+          <div class="icon-a icon"
+               @click="showSetting(0)">A</div>
         </div>
       </div>
     </transition>
     <transition name="slide-up">
       <div class="setting-wrapper"
-      v-show="ifSettingShow">
-        <div class="setting-font-size" v-if="showTag === 0">
-          <div class="preview" :style="{fontSize:
+           v-show="ifSettingShow">
+        <div class="setting-font-size"
+             v-if="showTag === 0">
+          <div class="preview"
+               :style="{fontSize:
           fontSizeList[0].fontSize + 'px'}">A</div>
           <div class="select">
-            <div class="select-wrapper" v-for="(item, index) in fontSizeList" :key="index"
-              @click="setFontSize(item.fontSize)">
+            <div class="select-wrapper"
+                 v-for="(item, index) in fontSizeList"
+                 :key="index"
+                 @click="setFontSize(item.fontSize)">
               <div class="line"></div>
               <div class="point-wrapper">
                 <div class="point"
-                v-show="defaultFontSize
+                     v-show="defaultFontSize
                 === item.fontSize">
                   <div class="small-point">
 
@@ -40,32 +48,40 @@
               <div class="line"></div>
             </div>
           </div>
-          <div class="preview" :style="{fontSize:
+          <div class="preview"
+               :style="{fontSize:
           fontSizeList[fontSizeList.length - 1]
           .fontSize + 'px'}">A</div>
         </div>
-        <div class="setting-theme" v-else-if="showTag === 1">
-          <div class="setting-theme-item" v-for="(item, index) in themeList" :key="index"
-              @click="setTheme(index)">
-            <div class="preview" :style="{background: item.style.body.background}"
-            :class="{'no-border': item.style.body.background !== '#fff'}"></div>
-            <div class="text" :class="{'selected': index === defaultTheme}">{{item.name}}</div>
+        <div class="setting-theme"
+             v-else-if="showTag === 1">
+          <div class="setting-theme-item"
+               v-for="(item, index) in themeList"
+               :key="index"
+               @click="setTheme(index)">
+            <div class="preview"
+                 :style="{background: item.style.body.background}"
+                 :class="{'no-border': item.style.body.background !== '#fff'}"></div>
+            <div class="text"
+                 :class="{'selected': index === defaultTheme}">{{item.name}}</div>
           </div>
         </div>
-        <div class="setting-progress" v-else-if="showTag === 2">
+        <div class="setting-progress"
+             v-else-if="showTag === 2">
           <div class="progress-wrapper">
-            <input class="progress" :style="styles"
-                                    type="range"
-                                    max="100"
-                                    min="0"
-                                    step="1"
-                                    @change="onProgressChange($event.target.value)"
-                                    @input="onProgressInput($event.target.value)"
-                                    :value="progress"
-                                    :disabled="!bookAvailable"
-                                    ref="progress">
+            <input class="progress"
+                   :style="styles"
+                   type="range"
+                   max="100"
+                   min="0"
+                   step="1"
+                   @change="onProgressChange($event.target.value)"
+                   @input="onProgressInput($event.target.value)"
+                   :value="progress"
+                   :disabled="!bookAvailable"
+                   ref="progress">
             <div class="text-wrapper">
-            <span>{{bookAvailable ? progress  + '%' : '加载中...'}}</span>
+              <span>{{bookAvailable ? progress + '%' : '加载中...'}}</span>
             </div>
           </div>
         </div>
@@ -78,16 +94,16 @@
                   @jumpTo="jumpTo"></content-view>
     <transition name="fade">
       <div class="content-mask"
-            v-show="ifShowContent"
-            @click="hideContent"></div>
+           v-show="ifShowContent"
+           @click="hideContent"></div>
     </transition>
   </div>
 </template>
 
 <script>
-import ContentView from '@/components/Content'
+import ContentView from './Content'
 export default {
-  name: 'MenuBar',
+  name: 'EookMenuBar',
   components: {
     ContentView
   },
@@ -170,8 +186,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='scss' scoped>
-@import '../assets/styles/global';
-.menu-bar {
+@import "../../assets/styles/global";
+.wechat-read-ebook-menu-bar {
   .menu-wrapper {
     position: absolute;
     bottom: 0;
@@ -181,7 +197,7 @@ export default {
     width: 100%;
     height: px2rem(48);
     background: white;
-    box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
+    box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, 0.15);
     &.hide-box-shadow {
       box-shadow: none;
     }
@@ -204,7 +220,7 @@ export default {
     width: 100%;
     height: px2rem(60);
     background-color: white;
-    box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, .15);
+    box-shadow: 0 px2rem(-8) px2rem(8) rgba(0, 0, 0, 0.15);
     .setting-font-size {
       display: flex;
       height: 100%;
@@ -224,7 +240,6 @@ export default {
               &:first-child {
                 border-top: none;
               }
-
             }
           }
           &:last-child {
@@ -254,8 +269,7 @@ export default {
               border-radius: 50%;
               background-color: white;
               border: px2rem(1) solid #ccc;
-              box-shadow: 0 px2rem(4) px2rem(4)
-              rgba(0, 0, 0, .15);
+              box-shadow: 0 px2rem(4) px2rem(4) rgba(0, 0, 0, 0.15);
               @include center;
               .small-point {
                 width: px2rem(5);
@@ -310,8 +324,8 @@ export default {
           width: 100%;
           -webkit-appearance: none;
           height: px2rem(2);
-          background: -webkit-linear-gradient(#999, #999)
-            no-repeat, rgb(241, 239, 239);
+          background: -webkit-linear-gradient(#999, #999) no-repeat,
+            rgb(241, 239, 239);
           background-size: 0 100%;
           &:focus {
             outline: none;
@@ -322,7 +336,7 @@ export default {
             width: px2rem(20);
             border-radius: 50%;
             background: white;
-            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, .15);
+            box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.15);
             border: px2rem(1) solid #ddd;
           }
         }
@@ -346,8 +360,7 @@ export default {
     display: flex;
     width: 100%;
     height: 100%;
-    background: rgba(51, 51, 51, .8);
+    background: rgba(51, 51, 51, 0.8);
   }
 }
-
 </style>
