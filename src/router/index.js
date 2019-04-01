@@ -1,11 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Ebook from '@/components/ebook/Ebook'
-import Shelf from '@/components/shelf/index'
-import Find from '@/components/find/index'
-import Idea from '@/components/idea/index'
-import My from '@/components/my/index'
-import NavBar from '@/components/NavBar'
 
 Vue.use(Router)
 
@@ -17,31 +11,58 @@ export default new Router({
     },
     {
       path: '/ebook/:id',
-      component: Ebook
+      component: r =>
+        require.ensure(
+          [],
+          () => r(require('@/components/ebook/Ebook')),
+          'ebook'
+        )
     },
     {
       path: '/navBar',
-      component: NavBar,
+      component: r =>
+        require.ensure([], () => r(require('@/components/NavBar')), 'navbar'),
       children: [
         {
           path: '',
-          component: Shelf
+          component: r =>
+            require.ensure(
+              [],
+              () => r(require('@/components/shelf/index')),
+              'shelf'
+            )
         },
         {
           path: '/shelf',
-          component: Shelf
+          component: r =>
+            require.ensure(
+              [],
+              () => r(require('@/components/shelf/index')),
+              'shelf'
+            )
         },
         {
           path: '/find',
-          component: Find
+          component: r =>
+            require.ensure(
+              [],
+              () => r(require('@/components/find/index')),
+              'find'
+            )
         },
         {
           path: '/idea',
-          component: Idea
+          component: r =>
+            require.ensure(
+              [],
+              () => r(require('@/components/idea/index')),
+              'idea'
+            )
         },
         {
           path: '/my',
-          component: My
+          component: r =>
+            require.ensure([], () => r(require('@/components/my/index')), 'my')
         }
       ]
     }
